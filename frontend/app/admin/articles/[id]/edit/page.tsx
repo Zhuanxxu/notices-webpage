@@ -456,18 +456,24 @@ export default function EditArticlePage() {
                     </select>
                     {coverageForm.media_source_id && (
                       <div className="mt-2 flex items-center gap-2">
-                        {mediaSources.find(s => s.id.toString() === coverageForm.media_source_id)?.logo_url && (
-                          <img
-                            src={mediaSources.find(s => s.id.toString() === coverageForm.media_source_id)?.logo_url?.startsWith('http')
-                              ? mediaSources.find(s => s.id.toString() === coverageForm.media_source_id)?.logo_url
-                              : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}${mediaSources.find(s => s.id.toString() === coverageForm.media_source_id)?.logo_url}`}
-                            alt={mediaSources.find(s => s.id.toString() === coverageForm.media_source_id)?.name}
-                            className="h-8 w-auto object-contain"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
-                          />
-                        )}
+                        {(() => {
+                          const mediaSource = mediaSources.find(s => s.id.toString() === coverageForm.media_source_id);
+                          const logoUrl = mediaSource?.logo_url;
+                          if (!logoUrl) return null;
+                          const imageUrl = logoUrl.startsWith('http')
+                            ? logoUrl
+                            : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}${logoUrl}`;
+                          return (
+                            <img
+                              src={imageUrl}
+                              alt={mediaSource?.name || ''}
+                              className="h-8 w-auto object-contain"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).style.display = 'none';
+                              }}
+                            />
+                          );
+                        })()}
                         <span className="text-sm text-gray-600">
                           {mediaSources.find(s => s.id.toString() === coverageForm.media_source_id)?.name}
                         </span>

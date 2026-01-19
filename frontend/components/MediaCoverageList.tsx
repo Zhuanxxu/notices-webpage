@@ -78,18 +78,23 @@ export default function MediaCoverageList({ coverages }: MediaCoverageListProps)
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          {(coverage.media_source?.logo_url || coverage.media_logo) && (
-                            <img
-                              src={(coverage.media_source?.logo_url || coverage.media_logo)?.startsWith('http')
-                                ? (coverage.media_source?.logo_url || coverage.media_logo)
-                                : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}${coverage.media_source?.logo_url || coverage.media_logo}`}
-                              alt={coverage.media_source?.name || coverage.media_name || ''}
-                              className="h-6 w-auto object-contain"
-                              onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                                e.currentTarget.style.display = 'none';
-                              }}
-                            />
-                          )}
+                          {(() => {
+                            const logoUrl = coverage.media_source?.logo_url || coverage.media_logo;
+                            if (!logoUrl) return null;
+                            const imageUrl = logoUrl.startsWith('http')
+                              ? logoUrl
+                              : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}${logoUrl}`;
+                            return (
+                              <img
+                                src={imageUrl}
+                                alt={coverage.media_source?.name || coverage.media_name || ''}
+                                className="h-6 w-auto object-contain"
+                                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                                  e.currentTarget.style.display = 'none';
+                                }}
+                              />
+                            );
+                          })()}
                           <h5 className="font-semibold text-gray-900">
                             {coverage.coverage_title}
                           </h5>

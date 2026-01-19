@@ -151,3 +151,15 @@ node scripts/create-admin.js tu-email@ejemplo.com nueva-contraseña --update-pas
 ## Desarrollo
 
 El proyecto está configurado para desarrollo con hot-reload tanto en frontend como backend.
+
+## Deployment
+
+Para desplegar la aplicación online y hacerla accesible para pruebas, consulta la [Guía de Deployment](./DEPLOYMENT.md).
+
+### Resumen Rápido
+
+1. **Frontend**: Despliega en [Vercel](https://vercel.com) (gratis y optimizado para Next.js)
+2. **Backend**: Despliega en [Render](https://render.com) o [Railway](https://railway.app) (planes gratuitos disponibles)
+3. **Base de Datos**: Usa PostgreSQL de Render/Railway o una base de datos externa
+
+Ver [DEPLOYMENT.md](./DEPLOYMENT.md) para instrucciones detalladas paso a paso.
