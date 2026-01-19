@@ -47,10 +47,33 @@ console.log('NODE_ENV:', process.env.NODE_ENV);
 console.log('PORT:', PORT);
 console.log('DB_HOST:', process.env.DB_HOST ? 'configured' : 'not configured');
 
-// Middleware
+// Middleware CORS - Normalizar URL (eliminar barras finales)
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+const normalizedFrontendUrl = frontendUrl.replace(/\/+$/, ''); // Eliminar barras finales
+
+console.log('CORS configured for:', normalizedFrontendUrl);
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Permitir requests sin origin (como Postman, curl, etc.)
+    if (!origin) {
+      return callback(null, true);
+    }
+    
+    // Normalizar el origin (eliminar barras finales)
+    const normalizedOrigin = origin.replace(/\/+$/, '');
+    
+    // Verificar si el origin coincide (con o sin barra final)
+    if (normalizedOrigin === normalizedFrontendUrl || origin === normalizedFrontendUrl) {
+      callback(null, true);
+    } else {
+      console.warn('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
