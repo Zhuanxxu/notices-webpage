@@ -20,7 +20,8 @@ pool.on('connect', () => {
 
 pool.on('error', (err) => {
   console.error('Unexpected error on idle client', err);
-  process.exit(-1);
+  // No hacer exit inmediatamente, solo loguear el error
+  // El servidor puede seguir funcionando y reintentar la conexión
 });
 
 export default pool;
