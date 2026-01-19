@@ -1,11 +1,11 @@
 {
   "/_not-found": "app/_not-found.js",
-  "/article/[slug]/page": "app/article/[slug]/page.js",
   "/page": "app/page.js",
-  "/admin/articles/[id]/edit/page": "app/admin/articles/[id]/edit/page.js",
-  "/admin/login/page": "app/admin/login/page.js",
-  "/admin/articles/new/page": "app/admin/articles/new/page.js",
-  "/admin/media-sources/page": "app/admin/media-sources/page.js",
+  "/article/[slug]/page": "app/article/[slug]/page.js",
   "/admin/articles/page": "app/admin/articles/page.js",
-  "/admin/page": "app/admin/page.js"
+  "/admin/articles/new/page": "app/admin/articles/new/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/media-sources/page": "app/admin/media-sources/page.js",
+  "/admin/login/page": "app/admin/login/page.js",
+  "/admin/articles/[id]/edit/page": "app/admin/articles/[id]/edit/page.js"
 }

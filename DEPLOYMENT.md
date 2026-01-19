@@ -19,9 +19,11 @@ Esta es la opción más fácil y gratuita para empezar.
    - Importa tu repositorio
    - Configura el proyecto:
      - **Framework Preset**: Next.js
-     - **Root Directory**: `frontend`
+     - **Root Directory**: `frontend` (configúralo desde el panel, NO en vercel.json)
      - **Build Command**: `npm run build` (o deja el predeterminado)
      - **Output Directory**: `.next`
+   
+   **Nota importante**: El `rootDirectory` se configura desde el panel de configuración del proyecto en Vercel, no en el archivo `vercel.json`. El archivo `vercel.json` solo contiene configuraciones adicionales si son necesarias.
    
 3. **Variables de Entorno en Vercel**
    - Ve a Settings > Environment Variables
